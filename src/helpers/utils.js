@@ -94,9 +94,12 @@ exports.getLocaleFromRoute = (route = {}, routesNameSeparator = '', locales = []
  * Get x-forwarded-host
  * @return {String} x-forwarded-host
  */
-const getForwarded = () => (
-  process.browser ? window.location.href.split('/')[2] : (req.headers['x-forwarded-host'] ? req.headers['x-forwarded-host'] : req.headers.host)
-)
+const getForwarded = () => {
+  const locale = app.i18n.locales.find(locale => {
+    return locale.code === app.i18n.defaultLocale
+  })
+  return locale.domain
+}
 
 exports.getForwarded = getForwarded
 
