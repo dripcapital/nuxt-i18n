@@ -104,9 +104,12 @@ exports.getForwarded = getForwarded
  * Get hostname
  * @return {String} Hostname
  */
-const getHostname = () => (
-  process.browser ? window.location.href.split('/')[2] : req.headers.host // eslint-disable-line
-)
+const getHostname = () => {
+  const locale = app.i18n.locales.find(locale => {
+    return locale.code === app.i18n.defaultLocale
+  })
+  return locale.domain
+}
 
 exports.getHostname = getHostname
 

@@ -53,7 +53,7 @@ function switchLocalePathFactory (i18nPath) {
         let protocol
         if (!process.browser) {
           const { req } = this.$options._parentVnode.ssrContext
-          protocol = req.secure ? 'https' : 'http'
+          protocol = 'https'
         } else {
           protocol = window.location.href.split(':')[0]
         }
