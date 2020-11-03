@@ -23,23 +23,6 @@ Vue.mixin({
       htmlAttrs.lang = currentLocaleData[LOCALE_ISO_KEY]
     }
 
-    // hreflang tags
-    const link = this.$i18n.locales
-      .map(locale => {
-        if (locale[LOCALE_ISO_KEY]) {
-          return {
-            hid: 'alternate-hreflang-' + locale[LOCALE_ISO_KEY],
-            rel: 'alternate',
-            href: BASE_URL + this.switchLocalePath(locale.code),
-            hreflang: locale[LOCALE_ISO_KEY]
-          }
-        } else {
-          console.warn('[<%= options.MODULE_NAME %>] Locale ISO code is required to generate alternate link')
-          return null
-        }
-      })
-    .filter(item => !!item)
-
     // og:locale meta
     const meta = []
     // og:locale - current
@@ -66,7 +49,6 @@ Vue.mixin({
 
     return {
       htmlAttrs,
-      link,
       meta
     }
   }
